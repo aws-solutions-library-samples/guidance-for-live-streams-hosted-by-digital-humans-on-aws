@@ -1,0 +1,2007 @@
+{
+"Parameters": {
+    "CLOUDFRONTPREFIX": {
+        "Type": "String",
+        "Description": "the cloudfront orgin to S3 bucket."
+    },
+    "S3BUCKET": {
+        "Type": "String",
+        "Description": "S3 bucket."
+    }
+
+ },
+ "Resources": {
+  "VRplaybykeyServiceRoleE8A76650": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonDynamoDBFullAccess"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/VRplaybykey/ServiceRole/Resource"
+   }
+  },
+  "VRplaybykey1E148860": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+        "S3Bucket": {
+            "Ref": "S3BUCKET"
+            },
+         "S3Key": "VRplaybykey.zip"
+    },
+    "Role": {
+     "Fn::GetAtt": [
+      "VRplaybykeyServiceRoleE8A76650",
+      "Arn"
+     ]
+    },
+    "FunctionName": "VRplaybykey",
+    "Handler": "index.handler",
+    "Runtime": "nodejs16.x",
+    "Timeout": 30
+   },
+   "DependsOn": [
+    "VRplaybykeyServiceRoleE8A76650"
+   ]
+   
+  },
+  "getimguploadpresignurlServiceRole4CB0AB4C": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonS3FullAccess"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/get_img_upload_presign_url/ServiceRole/Resource"
+   }
+  },
+  "getimguploadpresignurl3541FA61": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+        "S3Bucket": {
+            "Ref": "S3BUCKET"
+            },
+         "S3Key": "get_img_upload_presign_url.zip"
+    },
+    "Role": {
+     "Fn::GetAtt": [
+      "getimguploadpresignurlServiceRole4CB0AB4C",
+      "Arn"
+     ]
+    },
+    "Environment": {
+        "Variables": {
+         "S3_BUCKET": {
+          "Ref": "S3BUCKET"
+         }
+        }
+    },
+    "FunctionName": "get_img_upload_presign_url",
+    "Handler": "index.handler",
+    "Runtime": "nodejs16.x",
+    "Timeout": 30
+   },
+   "DependsOn": [
+    "getimguploadpresignurlServiceRole4CB0AB4C"
+   ]
+  },
+  "setmaterialmetadataServiceRole7E4B4BD3": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonS3FullAccess"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonPollyFullAccess"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonDynamoDBFullAccess"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/set_material_metadata/ServiceRole/Resource"
+   }
+  },
+  "setmaterialmetadataCFF6E94D": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code":  {
+        "S3Bucket": {
+            "Ref": "S3BUCKET"
+            },
+         "S3Key": "set_material_metadata.zip"
+    },
+    "Role": {
+     "Fn::GetAtt": [
+      "setmaterialmetadataServiceRole7E4B4BD3",
+      "Arn"
+     ]
+    },
+    "Environment":  {
+        "Variables": {
+         "CLOUDFRONT_PREFIX": {
+          "Ref": "CLOUDFRONTPREFIX"
+         },
+         "S3_BUCKET": {
+          "Ref": "S3BUCKET"
+         }
+        }
+    },
+    "FunctionName": "set_material_metadata",
+    "Handler": "lambda_function.lambda_handler",
+    "Runtime": "python3.9",
+    "Timeout": 300
+   },
+   "DependsOn": [
+    "setmaterialmetadataServiceRole7E4B4BD3"
+   ]
+  },
+  "getmaterialmetadatabykeyServiceRole55FE4429": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonDynamoDBFullAccess"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/get_material_metadata_bykey/ServiceRole/Resource"
+   }
+  },
+  "getmaterialmetadatabykey5C9A3E8D": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+        "S3Bucket": {
+            "Ref": "S3BUCKET"
+            },
+         "S3Key": "get_material_metadata_bykey.zip"
+    },
+    "Role": {
+     "Fn::GetAtt": [
+      "getmaterialmetadatabykeyServiceRole55FE4429",
+      "Arn"
+     ]
+    },
+    "FunctionName": "get_material_metadata_bykey",
+    "Handler": "lambda_function.lambda_handler",
+    "Runtime": "python3.9",
+    "Timeout": 300
+   },
+   "DependsOn": [
+    "getmaterialmetadatabykeyServiceRole55FE4429"
+   ]
+ 
+  },
+  "getmaterialmetadatatobeplayedbykeyServiceRole297FC1E1": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonDynamoDBFullAccess"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/get_material_metadata_to_be_played_bykey/ServiceRole/Resource"
+   }
+  },
+  "getmaterialmetadatatobeplayedbykey9994FA3C": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code":  {
+        "S3Bucket": {
+            "Ref": "S3BUCKET"
+            },
+         "S3Key": "get_material_metadata_to_be_played_bykey.zip"
+    },
+    "Role": {
+     "Fn::GetAtt": [
+      "getmaterialmetadatatobeplayedbykeyServiceRole297FC1E1",
+      "Arn"
+     ]
+    },
+    "FunctionName": "get_material_metadata_to_be_played_bykey",
+    "Handler": "lambda_function.lambda_handler",
+    "Runtime": "python3.9",
+    "Timeout": 300
+   },
+   "DependsOn": [
+    "getmaterialmetadatatobeplayedbykeyServiceRole297FC1E1"
+   ]
+  },
+  "deletedynamodbmetadataServiceRole0578070C": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     },
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonDynamoDBFullAccess"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/delete_dynamodb_metadata/ServiceRole/Resource"
+   }
+  },
+  "deletedynamodbmetadata09B6A573": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+        "S3Bucket": {
+            "Ref": "S3BUCKET"
+            },
+         "S3Key": "delete_dynamodb_metadata.zip"
+     },
+    "Role": {
+     "Fn::GetAtt": [
+      "deletedynamodbmetadataServiceRole0578070C",
+      "Arn"
+     ]
+    },
+    "FunctionName": "delete_dynamodb_metadata",
+    "Handler": "lambda_function.lambda_handler",
+    "Runtime": "python3.9",
+    "Timeout": 300
+   },
+   "DependsOn": [
+    "deletedynamodbmetadataServiceRole0578070C"
+   ]
+  },
+  "digitalhumanEBD9BA1E": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "EndpointConfiguration": {
+     "Types": [
+      "REGIONAL"
+     ]
+    },
+    "Name": "digitalhuman"
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Resource"
+   }
+  },
+  "digitalhumanDeployment8F89C61Fa9c77d6d16175b402438629bf74cd13e": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "RestApiId": {
+     "Ref": "digitalhumanEBD9BA1E"
+    },
+    "Description": "Automatically created by the RestApi construct"
+   },
+   "DependsOn": [
+    "digitalhumandeletedynamodbmetadataOPTIONSFF811822",
+    "digitalhumandeletedynamodbmetadataPOSTDB851664",
+    "digitalhumandeletedynamodbmetadataFC909D2E",
+    "digitalhumangetimguploadpresignurlGET3DB823D0",
+    "digitalhumangetimguploadpresignurlOPTIONS7293A7DD",
+    "digitalhumangetimguploadpresignurl5CA597FB",
+    "digitalhumangetmaterialmetadatabykeyOPTIONSD26ED066",
+    "digitalhumangetmaterialmetadatabykeyPOST7641A8B4",
+    "digitalhumangetmaterialmetadatabykeyEE81BBAE",
+    "digitalhumangetmaterialmetadatatobeplayedbykeyGETD4AE0B0B",
+    "digitalhumangetmaterialmetadatatobeplayedbykeyOPTIONS488C5494",
+    "digitalhumangetmaterialmetadatatobeplayedbykey83BBDB44",
+    "digitalhumanOPTIONSC8DCE00D",
+    "digitalhumansetmaterialmetadataOPTIONS33B30127",
+    "digitalhumansetmaterialmetadataPOSTB7AA64FD",
+    "digitalhumansetmaterialmetadataEA000F8C",
+    "digitalhumanVRplaybykeyOPTIONSFFEFAE1B",
+    "digitalhumanVRplaybykeyPOST6A508039",
+    "digitalhumanVRplaybykey456F33FF"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Deployment/Resource"
+   }
+  },
+  "digitalhumanDeploymentStageprod9E2829EF": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "RestApiId": {
+     "Ref": "digitalhumanEBD9BA1E"
+    },
+    "DeploymentId": {
+     "Ref": "digitalhumanDeployment8F89C61Fa9c77d6d16175b402438629bf74cd13e"
+    },
+    "StageName": "prod"
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/DeploymentStage.prod/Resource"
+   }
+  },
+  "digitalhumanOPTIONSC8DCE00D": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "HttpMethod": "OPTIONS",
+    "ResourceId": {
+     "Fn::GetAtt": [
+      "digitalhumanEBD9BA1E",
+      "RootResourceId"
+     ]
+    },
+    "RestApiId": {
+     "Ref": "digitalhumanEBD9BA1E"
+    },
+    "AuthorizationType": "NONE",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/OPTIONS/Resource"
+   }
+  },
+  "digitalhumanVRplaybykey456F33FF": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "digitalhumanEBD9BA1E",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "VRplaybykey",
+    "RestApiId": {
+     "Ref": "digitalhumanEBD9BA1E"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/VRplaybykey/Resource"
+   }
+  },
+  "digitalhumanVRplaybykeyOPTIONSFFEFAE1B": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "HttpMethod": "OPTIONS",
+    "ResourceId": {
+     "Ref": "digitalhumanVRplaybykey456F33FF"
+    },
+    "RestApiId": {
+     "Ref": "digitalhumanEBD9BA1E"
+    },
+    "AuthorizationType": "NONE",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/VRplaybykey/OPTIONS/Resource"
+   }
+  },
+  "digitalhumanVRplaybykeyPOSTApiPermissionDigitalhumanstackStackdigitalhumanE4EB6B01POSTVRplaybykeyAB3913CF": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "VRplaybykey1E148860",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "digitalhumanEBD9BA1E"
+       },
+       "/",
+       {
+        "Ref": "digitalhumanDeploymentStageprod9E2829EF"
+       },
+       "/POST/VRplaybykey"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/VRplaybykey/POST/ApiPermission.DigitalhumanstackStackdigitalhumanE4EB6B01.POST..VRplaybykey"
+   }
+  },
+  "digitalhumanVRplaybykeyPOSTApiPermissionTestDigitalhumanstackStackdigitalhumanE4EB6B01POSTVRplaybykey04852E8B": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "VRplaybykey1E148860",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "digitalhumanEBD9BA1E"
+       },
+       "/test-invoke-stage/POST/VRplaybykey"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/VRplaybykey/POST/ApiPermission.Test.DigitalhumanstackStackdigitalhumanE4EB6B01.POST..VRplaybykey"
+   }
+  },
+  "digitalhumanVRplaybykeyPOST6A508039": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "HttpMethod": "POST",
+    "ResourceId": {
+     "Ref": "digitalhumanVRplaybykey456F33FF"
+    },
+    "RestApiId": {
+     "Ref": "digitalhumanEBD9BA1E"
+    },
+    "AuthorizationType": "NONE",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:",
+        {
+         "Ref": "AWS::Region"
+        },
+        ":lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "VRplaybykey1E148860",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/VRplaybykey/POST/Resource"
+   }
+  },
+  "digitalhumansetmaterialmetadataEA000F8C": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "digitalhumanEBD9BA1E",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "set_material_metadata",
+    "RestApiId": {
+     "Ref": "digitalhumanEBD9BA1E"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/set_material_metadata/Resource"
+   }
+  },
+  "digitalhumansetmaterialmetadataOPTIONS33B30127": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "HttpMethod": "OPTIONS",
+    "ResourceId": {
+     "Ref": "digitalhumansetmaterialmetadataEA000F8C"
+    },
+    "RestApiId": {
+     "Ref": "digitalhumanEBD9BA1E"
+    },
+    "AuthorizationType": "NONE",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/set_material_metadata/OPTIONS/Resource"
+   }
+  },
+  "digitalhumansetmaterialmetadataPOSTApiPermissionDigitalhumanstackStackdigitalhumanE4EB6B01POSTsetmaterialmetadata13C44EBF": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "setmaterialmetadataCFF6E94D",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "digitalhumanEBD9BA1E"
+       },
+       "/",
+       {
+        "Ref": "digitalhumanDeploymentStageprod9E2829EF"
+       },
+       "/POST/set_material_metadata"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/set_material_metadata/POST/ApiPermission.DigitalhumanstackStackdigitalhumanE4EB6B01.POST..set_material_metadata"
+   }
+  },
+  "digitalhumansetmaterialmetadataPOSTApiPermissionTestDigitalhumanstackStackdigitalhumanE4EB6B01POSTsetmaterialmetadataB5E1D692": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "setmaterialmetadataCFF6E94D",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "digitalhumanEBD9BA1E"
+       },
+       "/test-invoke-stage/POST/set_material_metadata"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/set_material_metadata/POST/ApiPermission.Test.DigitalhumanstackStackdigitalhumanE4EB6B01.POST..set_material_metadata"
+   }
+  },
+  "digitalhumansetmaterialmetadataPOSTB7AA64FD": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "HttpMethod": "POST",
+    "ResourceId": {
+     "Ref": "digitalhumansetmaterialmetadataEA000F8C"
+    },
+    "RestApiId": {
+     "Ref": "digitalhumanEBD9BA1E"
+    },
+    "AuthorizationType": "NONE",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:",
+        {
+         "Ref": "AWS::Region"
+        },
+        ":lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "setmaterialmetadataCFF6E94D",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/set_material_metadata/POST/Resource"
+   }
+  },
+  "digitalhumangetmaterialmetadatabykeyEE81BBAE": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "digitalhumanEBD9BA1E",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "get_material_metadata_bykey",
+    "RestApiId": {
+     "Ref": "digitalhumanEBD9BA1E"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/get_material_metadata_bykey/Resource"
+   }
+  },
+  "digitalhumangetmaterialmetadatabykeyOPTIONSD26ED066": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "HttpMethod": "OPTIONS",
+    "ResourceId": {
+     "Ref": "digitalhumangetmaterialmetadatabykeyEE81BBAE"
+    },
+    "RestApiId": {
+     "Ref": "digitalhumanEBD9BA1E"
+    },
+    "AuthorizationType": "NONE",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/get_material_metadata_bykey/OPTIONS/Resource"
+   }
+  },
+  "digitalhumangetmaterialmetadatabykeyPOSTApiPermissionDigitalhumanstackStackdigitalhumanE4EB6B01POSTgetmaterialmetadatabykeyBF6C831D": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "getmaterialmetadatabykey5C9A3E8D",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "digitalhumanEBD9BA1E"
+       },
+       "/",
+       {
+        "Ref": "digitalhumanDeploymentStageprod9E2829EF"
+       },
+       "/POST/get_material_metadata_bykey"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/get_material_metadata_bykey/POST/ApiPermission.DigitalhumanstackStackdigitalhumanE4EB6B01.POST..get_material_metadata_bykey"
+   }
+  },
+  "digitalhumangetmaterialmetadatabykeyPOSTApiPermissionTestDigitalhumanstackStackdigitalhumanE4EB6B01POSTgetmaterialmetadatabykey34A48B2B": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "getmaterialmetadatabykey5C9A3E8D",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "digitalhumanEBD9BA1E"
+       },
+       "/test-invoke-stage/POST/get_material_metadata_bykey"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/get_material_metadata_bykey/POST/ApiPermission.Test.DigitalhumanstackStackdigitalhumanE4EB6B01.POST..get_material_metadata_bykey"
+   }
+  },
+  "digitalhumangetmaterialmetadatabykeyPOST7641A8B4": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "HttpMethod": "POST",
+    "ResourceId": {
+     "Ref": "digitalhumangetmaterialmetadatabykeyEE81BBAE"
+    },
+    "RestApiId": {
+     "Ref": "digitalhumanEBD9BA1E"
+    },
+    "AuthorizationType": "NONE",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:",
+        {
+         "Ref": "AWS::Region"
+        },
+        ":lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "getmaterialmetadatabykey5C9A3E8D",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/get_material_metadata_bykey/POST/Resource"
+   }
+  },
+  "digitalhumangetmaterialmetadatatobeplayedbykey83BBDB44": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "digitalhumanEBD9BA1E",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "get_material_metadata_to_be_played_bykey",
+    "RestApiId": {
+     "Ref": "digitalhumanEBD9BA1E"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/get_material_metadata_to_be_played_bykey/Resource"
+   }
+  },
+  "digitalhumangetmaterialmetadatatobeplayedbykeyOPTIONS488C5494": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "HttpMethod": "OPTIONS",
+    "ResourceId": {
+     "Ref": "digitalhumangetmaterialmetadatatobeplayedbykey83BBDB44"
+    },
+    "RestApiId": {
+     "Ref": "digitalhumanEBD9BA1E"
+    },
+    "AuthorizationType": "NONE",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/get_material_metadata_to_be_played_bykey/OPTIONS/Resource"
+   }
+  },
+  "digitalhumangetmaterialmetadatatobeplayedbykeyGETApiPermissionDigitalhumanstackStackdigitalhumanE4EB6B01GETgetmaterialmetadatatobeplayedbykey95161064": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "getmaterialmetadatatobeplayedbykey9994FA3C",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "digitalhumanEBD9BA1E"
+       },
+       "/",
+       {
+        "Ref": "digitalhumanDeploymentStageprod9E2829EF"
+       },
+       "/GET/get_material_metadata_to_be_played_bykey"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/get_material_metadata_to_be_played_bykey/GET/ApiPermission.DigitalhumanstackStackdigitalhumanE4EB6B01.GET..get_material_metadata_to_be_played_bykey"
+   }
+  },
+  "digitalhumangetmaterialmetadatatobeplayedbykeyGETApiPermissionTestDigitalhumanstackStackdigitalhumanE4EB6B01GETgetmaterialmetadatatobeplayedbykey709C1EB8": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "getmaterialmetadatatobeplayedbykey9994FA3C",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "digitalhumanEBD9BA1E"
+       },
+       "/test-invoke-stage/GET/get_material_metadata_to_be_played_bykey"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/get_material_metadata_to_be_played_bykey/GET/ApiPermission.Test.DigitalhumanstackStackdigitalhumanE4EB6B01.GET..get_material_metadata_to_be_played_bykey"
+   }
+  },
+  "digitalhumangetmaterialmetadatatobeplayedbykeyGETD4AE0B0B": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "HttpMethod": "GET",
+    "ResourceId": {
+     "Ref": "digitalhumangetmaterialmetadatatobeplayedbykey83BBDB44"
+    },
+    "RestApiId": {
+     "Ref": "digitalhumanEBD9BA1E"
+    },
+    "AuthorizationType": "NONE",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:",
+        {
+         "Ref": "AWS::Region"
+        },
+        ":lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "getmaterialmetadatatobeplayedbykey9994FA3C",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/get_material_metadata_to_be_played_bykey/GET/Resource"
+   }
+  },
+  "digitalhumandeletedynamodbmetadataFC909D2E": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "digitalhumanEBD9BA1E",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "delete_dynamodb_metadata",
+    "RestApiId": {
+     "Ref": "digitalhumanEBD9BA1E"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/delete_dynamodb_metadata/Resource"
+   }
+  },
+  "digitalhumandeletedynamodbmetadataOPTIONSFF811822": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "HttpMethod": "OPTIONS",
+    "ResourceId": {
+     "Ref": "digitalhumandeletedynamodbmetadataFC909D2E"
+    },
+    "RestApiId": {
+     "Ref": "digitalhumanEBD9BA1E"
+    },
+    "AuthorizationType": "NONE",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/delete_dynamodb_metadata/OPTIONS/Resource"
+   }
+  },
+  "digitalhumandeletedynamodbmetadataPOSTApiPermissionDigitalhumanstackStackdigitalhumanE4EB6B01POSTdeletedynamodbmetadata0B34305B": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "deletedynamodbmetadata09B6A573",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "digitalhumanEBD9BA1E"
+       },
+       "/",
+       {
+        "Ref": "digitalhumanDeploymentStageprod9E2829EF"
+       },
+       "/POST/delete_dynamodb_metadata"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/delete_dynamodb_metadata/POST/ApiPermission.DigitalhumanstackStackdigitalhumanE4EB6B01.POST..delete_dynamodb_metadata"
+   }
+  },
+  "digitalhumandeletedynamodbmetadataPOSTApiPermissionTestDigitalhumanstackStackdigitalhumanE4EB6B01POSTdeletedynamodbmetadataA81AA1A4": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "deletedynamodbmetadata09B6A573",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "digitalhumanEBD9BA1E"
+       },
+       "/test-invoke-stage/POST/delete_dynamodb_metadata"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/delete_dynamodb_metadata/POST/ApiPermission.Test.DigitalhumanstackStackdigitalhumanE4EB6B01.POST..delete_dynamodb_metadata"
+   }
+  },
+  "digitalhumandeletedynamodbmetadataPOSTDB851664": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "HttpMethod": "POST",
+    "ResourceId": {
+     "Ref": "digitalhumandeletedynamodbmetadataFC909D2E"
+    },
+    "RestApiId": {
+     "Ref": "digitalhumanEBD9BA1E"
+    },
+    "AuthorizationType": "NONE",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:",
+        {
+         "Ref": "AWS::Region"
+        },
+        ":lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "deletedynamodbmetadata09B6A573",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/delete_dynamodb_metadata/POST/Resource"
+   }
+  },
+  "digitalhumangetimguploadpresignurl5CA597FB": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "digitalhumanEBD9BA1E",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "get_img_upload_presign_url",
+    "RestApiId": {
+     "Ref": "digitalhumanEBD9BA1E"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/get_img_upload_presign_url/Resource"
+   }
+  },
+  "digitalhumangetimguploadpresignurlOPTIONS7293A7DD": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "HttpMethod": "OPTIONS",
+    "ResourceId": {
+     "Ref": "digitalhumangetimguploadpresignurl5CA597FB"
+    },
+    "RestApiId": {
+     "Ref": "digitalhumanEBD9BA1E"
+    },
+    "AuthorizationType": "NONE",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/get_img_upload_presign_url/OPTIONS/Resource"
+   }
+  },
+  "digitalhumangetimguploadpresignurlGETApiPermissionDigitalhumanstackStackdigitalhumanE4EB6B01GETgetimguploadpresignurl79805582": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "getimguploadpresignurl3541FA61",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "digitalhumanEBD9BA1E"
+       },
+       "/",
+       {
+        "Ref": "digitalhumanDeploymentStageprod9E2829EF"
+       },
+       "/GET/get_img_upload_presign_url"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/get_img_upload_presign_url/GET/ApiPermission.DigitalhumanstackStackdigitalhumanE4EB6B01.GET..get_img_upload_presign_url"
+   }
+  },
+  "digitalhumangetimguploadpresignurlGETApiPermissionTestDigitalhumanstackStackdigitalhumanE4EB6B01GETgetimguploadpresignurl7C9633AA": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "getimguploadpresignurl3541FA61",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:",
+       {
+        "Ref": "AWS::Region"
+       },
+       ":",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":",
+       {
+        "Ref": "digitalhumanEBD9BA1E"
+       },
+       "/test-invoke-stage/GET/get_img_upload_presign_url"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/get_img_upload_presign_url/GET/ApiPermission.Test.DigitalhumanstackStackdigitalhumanE4EB6B01.GET..get_img_upload_presign_url"
+   }
+  },
+  "digitalhumangetimguploadpresignurlGET3DB823D0": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "HttpMethod": "GET",
+    "ResourceId": {
+     "Ref": "digitalhumangetimguploadpresignurl5CA597FB"
+    },
+    "RestApiId": {
+     "Ref": "digitalhumanEBD9BA1E"
+    },
+    "AuthorizationType": "NONE",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:",
+        {
+         "Ref": "AWS::Region"
+        },
+        ":lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "getimguploadpresignurl3541FA61",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/digitalhuman/Default/get_img_upload_presign_url/GET/Resource"
+   }
+  },
+  "vrdemo2719DAB4": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "KeySchema": [
+     {
+      "AttributeName": "demo_name",
+      "KeyType": "HASH"
+     },
+     {
+      "AttributeName": "index",
+      "KeyType": "RANGE"
+     }
+    ],
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "demo_name",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "index",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "vr_module",
+      "AttributeType": "S"
+     }
+    ],
+    "GlobalSecondaryIndexes": [
+     {
+      "IndexName": "vr-module-index",
+      "KeySchema": [
+       {
+        "AttributeName": "vr_module",
+        "KeyType": "HASH"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      },
+      "ProvisionedThroughput": {
+       "ReadCapacityUnits": 5,
+       "WriteCapacityUnits": 5
+      }
+     }
+    ],
+    "PointInTimeRecoverySpecification": {
+     "PointInTimeRecoveryEnabled": true
+    },
+    "ProvisionedThroughput": {
+     "ReadCapacityUnits": 5,
+     "WriteCapacityUnits": 5
+    },
+    "SSESpecification": {
+     "SSEEnabled": true
+    },
+    "StreamSpecification": {
+     "StreamViewType": "NEW_AND_OLD_IMAGES"
+    },
+    "TableName": "vr-demo"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/vr-demo/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/02QwU7DMAyGn2X3NAwqwXkb4oaYBvfJTUzx2iRV42iqqrw7SVpET/7s3/7t5Em+1HK/g7uvlO6qnho5fzKoTqTSde7BNBrk/BasYnJWnL7tls84GvI+ZVEQGDlfXI9ZyDEKX1/Be2QvDzmkXB6D6pCP4FHAQC0w3mFKc+j5MFAZXfEVh95NBi3n6iZL97VlyQKp34VRYfF8R/5xOosr/amrc+Eo9GTBOJ0e+wXNcnGBGP8Hysl5Bdk2N3wEHgJvfTKfnNXE5QPOU9poH2r5uJfPu5snqsZgmQzKyxJ/AbhIHapuAQAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "DigitalhumanstackStack/CDKMetadata/Default"
+   },
+   "Condition": "CDKMetadataAvailable"
+  }
+ },
+ "Outputs": {
+  "digitalhumanEndpoint69CE338E": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "digitalhumanEBD9BA1E"
+      },
+      ".execute-api.",
+      {
+       "Ref": "AWS::Region"
+      },
+      ".",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "digitalhumanDeploymentStageprod9E2829EF"
+      },
+      "/"
+     ]
+    ]
+   }
+  }
+ },
+ "Conditions": {
+  "CDKMetadataAvailable": {
+   "Fn::Or": [
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "af-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-northwest-1"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "sa-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-2"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-2"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ }
+
+
+}
