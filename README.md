@@ -26,10 +26,15 @@ Fulfill the requirement of high-quality digital human to be talking in typical s
 
 
 1.Operator uses APIs or front-end pages that encapsulate APIs to send control commands of the digital human streamer or question messages from viewers to Amazon API Gateway.
+
 2.API Gateway passes the question messages to the LLM(Large Language Model)powered QA(Question and Answer) system, and gets suggested answer from the system. All APIs are configured with authentication. Amazon CloudWatch monitors for Lambda functions and API calls.
+
 3.AWS Lambda uses Amazon Polly to convert  answers into a voice file, stores assets in Amazon Simple Storage Service (Amazon S3) and saves the metadata in Amazon DynamoDB.
-4.The API Gateway passes the control commands of the digital human to a VR module running VR application hosted on Amazon Elastic Compute Cloud (Amazon EC2) - g4dn series are recommended. If the EC2 GPU usage is reaching threshold, Amazon EC2 Auto Scaling can launch a new instance within the Auto Scaling group  
-5.The VR application runs the digital human module, renders images into video streams and pushes streams to the EC2s hosting a streaming module. . If the EC2 CPU usage is reaching threshold, Amazon EC2 Auto Scaling can launch a new instance within the Auto Scaling group   
+
+4.The API Gateway passes the control commands of the digital human to a VR module running VR application hosted on Amazon Elastic Compute Cloud (Amazon EC2) - g4dn series are recommended. If the EC2 GPU usage is reaching threshold, Amazon EC2 Auto Scaling can launch a new instance within the Auto Scaling group.
+
+5.The VR application runs the digital human module, renders images into video streams and pushes streams to the EC2s hosting a streaming module. . If the EC2 CPU usage is reaching threshold, Amazon EC2 Auto Scaling can launch a new instance within the Auto Scaling group.
+
 6.Amazon Interactive Video Service (Amazon IVS low-latency) distributes the livestream to viewers’ mobile phone or web applications
 IVS real-time streaming is recommended to reduce latency.
 
