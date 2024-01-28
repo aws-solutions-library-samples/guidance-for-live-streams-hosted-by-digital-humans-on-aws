@@ -9,8 +9,7 @@
 
 1. [Overview](#overview-required)
 2. [Prerequisites](#prerequisites-required)
-3. [Deployment Steps](#deployment-steps-required)
-4. [Deployment Validation and Deployment Validation ](#Deployment Steps and Deployment Validation)
+3. [Deployment Validation and Deployment Validation ](#Deployment-Steps-and-Deployment-Validation)
 
 
 
@@ -23,7 +22,7 @@ Fulfill the requirement of high-quality digital human to be talking in typical s
 
 ### 3. Architecture
 
-     ![Alt text](https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hosted-by-digital-humans-on-aws/blob/main/assets/images/architecture.jpg)
+![Alt text](https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hosted-by-digital-humans-on-aws/blob/main/assets/images/architecture.jpg)
 
 
 1.Operator uses APIs or front-end pages that encapsulate APIs to send control commands of the digital human streamer or question messages from viewers to Amazon API Gateway.
