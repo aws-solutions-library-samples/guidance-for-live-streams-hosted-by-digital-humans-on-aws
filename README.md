@@ -10,4 +10,4 @@ This guidance helps customers to build an end-to-end virtual human live streamin
 
 3. Architecture
 
-   ![Alt text](/assets/images/Screenshot 2024-01-28 at 21.42.48.png "architecture")
+   ![Alt text](https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hosted-by-digital-humans-on-aws/blob/main/assets/images/architecture.png)
