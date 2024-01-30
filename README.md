@@ -42,7 +42,7 @@ IVS real-time streaming is recommended to reduce latency.
 ## Prerequisites 
 
 ### AMI preparation
--this system's VR module part, we have prepare a default VR module with a few digital human 3D module samples, we will update the AMI name in different region in deployment guide
+-fpr this system's VR module part, we have prepared a default VR module with a few digital human 3D module samples, we will update the AMI name in different region in deployment guide
 
 
 ### AWS account requirements 
