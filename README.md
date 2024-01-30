@@ -4,9 +4,6 @@
 
 ## Table of Content 
 
-
-### Required
-
 1. [Overview](#overview-required)
 2. [Prerequisites](#prerequisites-required)
 3. [Deployment Validation and Deployment Validation ](#Deployment-Steps-and-Deployment-Validation)
