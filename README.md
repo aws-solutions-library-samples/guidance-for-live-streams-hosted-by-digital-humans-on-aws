@@ -123,7 +123,8 @@ b. Enter the template's Amazon S3 address of the json file
  
 Enter the Amazon S3 name {bucket name} and Amazon CloudFront {delivery address}, (Note that all distribution addresses must start with ‘https’, and end with‘/’
 ![Alt text](https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hosted-by-digital-humans-on-aws/blob/main/assets/images/Picture2.png)
-c Give the stack a name, use the default values for the others, and click summit
+
+c Give the stack a name, use the default values for the others settings, and click summit
 
 
 Automatically execute the template to establish a digital human control serverless architecture  After successful deployment, there will be an API Gateway root address in the output. Please remember that this address is {API root address} 
