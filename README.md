@@ -106,6 +106,7 @@ e.	Create a new distribution in Amazon CloudFront
 
 Return the source to the newly created Amazon S3 above and make the corresponding settings, as shown in the figure
 
+![Alt text](https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hosted-by-digital-humans-on-aws/blob/main/assets/images/Picture1.png)
 
  
 Click Create distribution
