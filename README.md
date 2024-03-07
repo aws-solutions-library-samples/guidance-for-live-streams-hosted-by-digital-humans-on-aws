@@ -122,7 +122,7 @@ a.	Upload all the code *.zip and *.json files to the S3 created in the above ste
 b. Enter the template's Amazon S3 address of the json file
  
 Enter the Amazon S3 name {bucket name} and Amazon CloudFront {delivery address}, (Note that all distribution addresses must start with ‘https’, and end with‘/’
-![Alt text](https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hosted-by-digital-humans-on-aws/blob/main/assets/images/Picture1.png)
+![Alt text](https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hosted-by-digital-humans-on-aws/blob/main/assets/images/Picture2.png)
 c Give the stack a name, use the default values for the others, and click summit
 
 
