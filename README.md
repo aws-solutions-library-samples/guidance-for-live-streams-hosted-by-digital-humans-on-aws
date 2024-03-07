@@ -52,8 +52,81 @@ IVS real-time streaming is recommended to reduce latency.
 
 ## Deployment Steps and Deployment Validation 
 
--Deployment Steps and Deloyment Validation are in the folder 
+### Create Amazon S3 and Amazon CloudFront and configure Amazon CloudFront to access Amazon S3
+a.	Click to create a bucket in us-east-1  
 
-/deployment/digital_human_deployment.pdf
+b.	Name the bucket, and markdown as {bucket name}, click Create bucket
+
+c.	Once created, set S3 cross-domain permissions and select the permission tab
+
+d.	Edit CORS permissions as follow
+
+[
+{
+“allowedHeaders”: [
+“*”
+],
+“allowedMethods”: [
+“PUT”,
+“POST”,
+“DELETE”
+],
+“allowedOrigins”: [
+“*”
+],
+“exposeHeaders”: []
+},
+{
+“allowedHeaders”: [
+“*”
+],
+“allowedMethods”: [
+“PUT”,
+“POST”,
+“DELETE”
+],
+“allowedOrigins”: [
+“*”
+],
+“exposeHeaders”: []
+},
+{
+“allowedHeaders”: [],
+“allowedMethods”: [
+“GET”
+],
+“allowedOrigins”: [
+“*”
+],
+“exposeHeaders”: []
+}
+]
+
+e.	Create a new distribution in Amazon CloudFront
+
+Return the source to the newly created Amazon S3 above and make the corresponding settings, as shown in the figure
+
+
+ 
+Click Create distribution
+
+And markdown as {distribution address} distribution domain name in Amazon CloudFront 
+ 
+
+
+### CloudFormation Stack deloyment
+
+a.	Upload all the code *.zip and *.json files to the S3 created in the above steps
+
+b. Enter the template's Amazon S3 address of the json file
+ 
+Enter the Amazon S3 name {bucket name} and Amazon CloudFront {delivery address}, (Note that all distribution addresses must start with ‘https’, and end with‘/’
+
+c Give the stack a name, use the default values for the others, and click summit
+
+
+Automatically execute the template to establish a digital human-driven serverless architecture deployment. After successful deployment, there will be an API Gateway root address in the output. Please remember that this address is {API root address} 
+![image](https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hosted-by-digital-humans-on-aws/assets/27773057/5f27315b-c5ac-4a4e-8f3f-96d8a3449fd0)
+
 
 
