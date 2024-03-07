@@ -126,7 +126,7 @@ c Give the stack a name, use the default values for the others, and click summit
 
 
 Automatically execute the template to establish a digital human-driven serverless architecture deployment. After successful deployment, there will be an API Gateway root address in the output. Please remember that this address is {API root address} 
-![image](https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hosted-by-digital-humans-on-aws/assets/27773057/5f27315b-c5ac-4a4e-8f3f-96d8a3449fd0)
+
 
 
 
