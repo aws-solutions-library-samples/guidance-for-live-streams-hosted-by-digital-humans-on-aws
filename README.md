@@ -1,7 +1,7 @@
 # Guidance for livestreams with digital humans on AWS
 
 
-
+https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hosted-by-digital-humans-on-aws/blob/main/README.md
 ## Table of Content 
 
 1. [Overview](#overview-required)
@@ -108,7 +108,6 @@ set original domain as the newly created Amazon S3 above and make the correspond
 
 ![Alt text](https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hosted-by-digital-humans-on-aws/blob/main/assets/images/Picture1.png)
 
- 
 Click Create distribution
 
 And markdown as {distribution address} distribution domain name in Amazon CloudFront 
@@ -117,7 +116,8 @@ And markdown as {distribution address} distribution domain name in Amazon CloudF
 
 ### CloudFormation Stack deloyment
 
-a.	Upload all the code *.zip and *.json files to the S3 created in the above steps
+a.	down load all files from /guidance-for-live-streams-hosted-by-digital-humans-on-aws
+/deployment/   and Upload all the code *.zip and *.json files to the S3 created in the above steps
 
 b. Enter the template's Amazon S3 address of the json file
  
