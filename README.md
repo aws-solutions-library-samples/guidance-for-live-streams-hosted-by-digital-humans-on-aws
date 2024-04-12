@@ -90,7 +90,7 @@ d.	Edit CORS permissions as follow
 
 e.	Create a new distribution in Amazon CloudFront
 
-set original domain as the newly created Amazon S3 above and make the corresponding settings, as shown in the figure
+Set original domain as the newly created Amazon S3 above and make the corresponding settings, as shown in the figure
 
 ![Alt text](https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hosted-by-digital-humans-on-aws/blob/main/assets/images/Picture1.png)
 
@@ -102,7 +102,7 @@ And markdown as {distribution address} distribution domain name in Amazon CloudF
 
 ### CloudFormation Stack deployment
 
-a.	down load all files from /guidance-for-live-streams-hosted-by-digital-humans-on-aws
+a.	Download all files from /guidance-for-live-streams-hosted-by-digital-humans-on-aws
 /deployment/   and Upload all the code *.zip and *.json files to the S3 created in the above steps
 
 b. Enter the template's Amazon S3 address of the json file
@@ -116,5 +116,17 @@ c Give the stack a name, use the default values for the others settings, and cli
 Automatically execute the template to establish a digital human control serverless architecture  After successful deployment, there will be an API Gateway root address in the output. Please remember that this address is {API root address} 
 
 
-
-
+### Deploy Test Static Web Page
+Download all files from /guidance-for-live-streams-hosted-by-digital-humans-on-aws/frontend
+User any local IDE tool(for example vscode) to Open the file /frontend/out/_next/static/chunks/index-f6c2c2f2684f1078.js
+replace the below part "https://image_endpoint.cloudfront.net/" and https://root_path.amazonaws.com/prod/" with  {distribution address} and {API root address} 
+```json
+[{"img_end_point":"https://image_endpoint.cloudfront.net/","root_path":"https://root_path.amazonaws.com/prod/"}]
+```
+for example
+```json
+[{"img_end_point":"https://d2f722a22c7b5y.cloudfront.net/","root_path":"https://wlj2111c051.execute-api.ap-east-1.amazonaws.com/prod/"}]
+```
+and save the file
+Upload all files and folder in /frontend/out/ to S3 Bucket rootpath
+![Alt text](https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hosted-by-digital-humans-on-aws/blob/main/assets/images/frontendfiles.png)
