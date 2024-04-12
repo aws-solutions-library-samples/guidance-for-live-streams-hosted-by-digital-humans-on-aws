@@ -148,11 +148,16 @@ in browser and go to the test page
 in this example,  the address is  https://d2f722a22c7b5y.cloudfront.net/index.html
 
 ### Validation with the test page
+
 Go into test page 
 ```
 {distribution address}/index.html
 ```
 Create the new digital human metadata
+
 list the digital human metadata
+
 Delete the digital human metadata
+
+![Alt text](https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hosted-by-digital-humans-on-aws/blob/main/assets/images/testpage.png)
 
