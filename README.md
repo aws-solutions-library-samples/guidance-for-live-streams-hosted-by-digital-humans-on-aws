@@ -121,12 +121,25 @@ Download all files from /guidance-for-live-streams-hosted-by-digital-humans-on-a
 User any local IDE tool(for example vscode) to Open the file /frontend/out/_next/static/chunks/index-f6c2c2f2684f1078.js
 replace the below part "https://image_endpoint.cloudfront.net/" and https://root_path.amazonaws.com/prod/" with  {distribution address} and {API root address} 
 ```json
-[{"img_end_point":"https://image_endpoint.cloudfront.net/","root_path":"https://root_path.amazonaws.com/prod/"}]
+[
+    {"img_end_point":"https://image_endpoint.cloudfront.net/",
+    "root_path":"https://root_path.amazonaws.com/prod/"
+    }
+]
 ```
 for example
 ```json
-[{"img_end_point":"https://d2f722a22c7b5y.cloudfront.net/","root_path":"https://wlj2111c051.execute-api.ap-east-1.amazonaws.com/prod/"}]
+[
+    {
+    "img_end_point":"https://d2f722a22c7b5y.cloudfront.net/",
+    "root_path":"https://wlj2111c051.execute-api.ap-east-1.amazonaws.com/prod/"
+    }
+]
 ```
 and save the file
 Upload all files and folder in /frontend/out/ to S3 Bucket rootpath
 ![Alt text](https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hosted-by-digital-humans-on-aws/blob/main/assets/images/frontendfiles.png)
+
+Now you can enter the url {distribution address}/index.html in browser and go to the test page
+in this example,  the address is  https://d2f722a22c7b5y.cloudfront.net/index.html
+
