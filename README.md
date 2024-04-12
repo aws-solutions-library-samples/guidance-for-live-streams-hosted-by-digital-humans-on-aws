@@ -64,7 +64,28 @@ d.	Edit CORS permissions as follow
 
 ![image](https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hosted-by-digital-humans-on-aws/assets/27773057/d01f0a40-6823-40ff-98ca-b2af8fcd8050)
 
-
+```json
+[ 
+    { 
+        "AllowedHeaders":["*"],
+        "AllowedMethods": ["PUT","POST", "DELETE"], 
+        "AllowedOrigins": ["*"],
+        "ExposeHeaders": [] 
+    }, 
+    { 
+        "AllowedHeaders": ["*"],
+        "AllowedMethods": ["PUT", "POST", "DELETE"], 
+        "AllowedOrigins": ["*"],
+        "ExposeHeaders": [] 
+    },
+    { 
+        "AllowedHeaders": [], 
+        "AllowedMethods": ["GET"], 
+        "AllowedOrigins": ["*"],
+        "ExposeHeaders": [] 
+    } 
+]
+```
 
 
 e.	Create a new distribution in Amazon CloudFront
@@ -79,7 +100,7 @@ And markdown as {distribution address} distribution domain name in Amazon CloudF
  
 
 
-### CloudFormation Stack deloyment
+### CloudFormation Stack deployment
 
 a.	down load all files from /guidance-for-live-streams-hosted-by-digital-humans-on-aws
 /deployment/   and Upload all the code *.zip and *.json files to the S3 created in the above steps
