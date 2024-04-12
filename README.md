@@ -163,3 +163,13 @@ Delete the digital human metadata
 
 ![Alt text](https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hosted-by-digital-humans-on-aws/blob/main/assets/images/testpage.png)
 
+## Clear the environment
+
+in Amazon CloudFormation console, delete the stack of  you have created in the step of " CloudFormation Stack deployment"
+
+![Alt text](https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hosted-by-digital-humans-on-aws/blob/main/assets/images/deletestack.png)
+
+delete the static page stored in the S3 bucket
+
+![Alt text](https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hosted-by-digital-humans-on-aws/blob/main/assets/images/deletetestpage.png)
+
