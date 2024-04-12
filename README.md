@@ -7,6 +7,7 @@ https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hoste
 1. [Overview](#overview-required)
 2. [Prerequisites](#prerequisites-required)
 3. [Deployment Validation and Deployment Validation ](#Deployment-Steps-and-Deployment-Validation)
+4. [Clearup the guidance ](#Clearup-the-guidance)
 
 
 
@@ -163,7 +164,7 @@ Delete the digital human metadata
 
 ![Alt text](https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hosted-by-digital-humans-on-aws/blob/main/assets/images/testpage.png)
 
-## Clear the environment
+## Clearup the guidance
 
 in Amazon CloudFormation console, delete the stack of  you have created in the step of " CloudFormation Stack deployment"
 
