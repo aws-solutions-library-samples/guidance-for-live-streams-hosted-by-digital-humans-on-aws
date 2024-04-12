@@ -140,6 +140,19 @@ and save the file
 Upload all files and folder in /frontend/out/ to S3 Bucket rootpath
 ![Alt text](https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hosted-by-digital-humans-on-aws/blob/main/assets/images/frontendfiles.png)
 
-Now you can enter the url {distribution address}/index.html in browser and go to the test page
+Now you can enter the url
+```
+{distribution address}/index.html
+```
+in browser and go to the test page
 in this example,  the address is  https://d2f722a22c7b5y.cloudfront.net/index.html
+
+### Validation with the test page
+Go into test page 
+```
+{distribution address}/index.html
+```
+Create the new digital human metadata
+list the digital human metadata
+Delete the digital human metadata
 
