@@ -158,9 +158,20 @@ Go into test page
 ```
 Create the new digital human metadata
 
-list the digital human metadata
+1. Select digital human character 3D module you want to use
+2. Input text in different language which you want to digital human say
+3. Upload the digital human backgroud picture, have to be width 1920, height 1080, jpg or png format
+4. Select the language and gender
+5. Select the Virtual Camera position
+6. you can use default value of VR module and Item
+
+List the digital human metadata
+
+   After create a metadata, you can see digital human metadata create in the page
 
 Delete the digital human metadata
+
+   Click delete button the metadata will disappear 
 
 ![Alt text](https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hosted-by-digital-humans-on-aws/blob/main/assets/images/testpage.png)
 
