@@ -1,7 +1,5 @@
 {
-  "Description" : "This template installs Guidance for Live Streams With Digital Humans on AWS (SO9377) and deploys the Assessor Lambda function as well as triggers the function."  
-},
-{
+"Description" : "This template installs Guidance for Live Streams With Digital Humans on AWS (SO9377) and deploys the Assessor Lambda function as well as triggers the function.",
 "Parameters": {
     "CLOUDFRONTPREFIX": {
         "Type": "String",
@@ -2303,6 +2301,4 @@
    ]
   }
  }
-
-
 }
