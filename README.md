@@ -139,7 +139,7 @@ for example
 ```
 and save the file
 
-Upload all files and folder in /frontend/out/ to S3 Bucket rootpath
+Upload all files and folder in assets/frontend/out/ to S3 Bucket rootpath
 ![Alt text](https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hosted-by-digital-humans-on-aws/blob/main/assets/images/frontendfiles.png)
 
 Now you can enter the url
