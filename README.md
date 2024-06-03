@@ -66,12 +66,7 @@ d.	Edit CORS permissions as follow
 
 ```json
 [ 
-    { 
-        "AllowedHeaders":["*"],
-        "AllowedMethods": ["PUT","POST", "DELETE"], 
-        "AllowedOrigins": ["*"],
-        "ExposeHeaders": [] 
-    }, 
+
     { 
         "AllowedHeaders": ["*"],
         "AllowedMethods": ["PUT", "POST", "DELETE"], 
