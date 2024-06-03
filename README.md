@@ -8,6 +8,7 @@ https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hoste
 2. [Prerequisites](#prerequisites-required)
 3. [Deployment Validation and Deployment Validation ](#Deployment-Steps-and-Deployment-Validation)
 4. [Clearup the guidance ](#Clearup-the-guidance)
+5. [Cost](#Cost)
 
 
 
@@ -178,4 +179,12 @@ in Amazon CloudFormation console, delete the stack of  you have created in the s
 delete the static page stored in the S3 bucket
 
 ![Alt text](https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hosted-by-digital-humans-on-aws/blob/main/assets/images/deletetestpage.png)
-
+## Cost
+| AWS service  | Dimensions | Cost [USD] |
+| ----------- | ------------ | ------------ |
+| Amazon API Gateway | 1,000,000 REST API calls per month  | $ 1.0 month |
+| Amazon Polly | 100,000 calls each call 100 Character per month  | $ 40.0 month |
+| Amazon Lambda | 1,000,000 Lambda Call  | $ 0.2 month |
+| Amazon DynamoDB | 1,000,000 Write/Read totally 1T per month  | $ 1.63 month |
+| Amazon S3 | 100G per month  | $ 2.30 month |
+| Amazon EC2 | g4dn.xlarge  | $ 333.61 month |
