@@ -114,7 +114,7 @@ Automatically execute the template to establish a digital human control serverle
 
 ### Deploy Test Static Web Page
 Download all files from /guidance-for-live-streams-hosted-by-digital-humans-on-aws/frontend
-User any local IDE tool(for example vscode) to Open the file /frontend/out/_next/static/chunks/index-f6c2c2f2684f1078.js
+User any local IDE tool(for example vscode) to Open the file /assets/frontend/out/_next/static/chunks/pages/index-f6c2c2f2684f1078.js
 replace the below part "https://image_endpoint.cloudfront.net/" and https://root_path.amazonaws.com/prod/" with  {distribution address} and {API root address} 
 ```json
 [
