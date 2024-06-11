@@ -5,10 +5,11 @@ https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hoste
 ## Table of Content 
 
 1. [Overview](#overview-required)
-2. [Prerequisites](#prerequisites-required)
-3. [Deployment Validation and Deployment Validation ](#Deployment-Steps-and-Deployment-Validation)
-4. [Clearup the guidance ](#Clearup-the-guidance)
-5. [Cost](#Cost)
+2. 5. [Cost](#Cost)
+3. [Prerequisites](#prerequisites-required)
+4. [Deployment Validation and Deployment Validation ](#Deployment-Steps-and-Deployment-Validation)
+5. [Clearup the guidance ](#Clearup-the-guidance)
+
 
 
 
@@ -36,6 +37,19 @@ Fulfill the requirement of high-quality digital human to be talking in typical s
 
 6.Amazon Interactive Video Service (Amazon IVS low-latency) distributes the livestream to viewers’ mobile phone or web applications
 IVS real-time streaming is recommended to reduce latency.
+
+## Cost
+
+You are responsible for the cost of the AWS services used while running this Guidance. As of June-2024, the cost for running this Guidance with the default settings in the ap-northeast-1 region is approximately $378.74 per month.
+
+| AWS service  | Dimensions | Cost [USD] |
+| ----------- | ------------ | ------------ |
+| Amazon API Gateway | 1,000,000 REST API calls per month  | $ 1.0 month |
+| Amazon Polly | 100,000 calls each call 100 Character per month  | $ 40.0 month |
+| Amazon Lambda | 1,000,000 Lambda Call  | $ 0.2 month |
+| Amazon DynamoDB | 1,000,000 Write/Read totally 1T per month  | $ 1.63 month |
+| Amazon S3 | 100G per month  | $ 2.30 month |
+| Amazon EC2 | g4dn.xlarge  | $ 333.61 month |
 
 
 ## Prerequisites 
@@ -179,12 +193,4 @@ in Amazon CloudFormation console, delete the stack of  you have created in the s
 delete the static page stored in the S3 bucket
 
 ![Alt text](https://github.com/aws-solutions-library-samples/guidance-for-live-streams-hosted-by-digital-humans-on-aws/blob/main/assets/images/deletetestpage.png)
-## Cost
-| AWS service  | Dimensions | Cost [USD] |
-| ----------- | ------------ | ------------ |
-| Amazon API Gateway | 1,000,000 REST API calls per month  | $ 1.0 month |
-| Amazon Polly | 100,000 calls each call 100 Character per month  | $ 40.0 month |
-| Amazon Lambda | 1,000,000 Lambda Call  | $ 0.2 month |
-| Amazon DynamoDB | 1,000,000 Write/Read totally 1T per month  | $ 1.63 month |
-| Amazon S3 | 100G per month  | $ 2.30 month |
-| Amazon EC2 | g4dn.xlarge  | $ 333.61 month |
+
